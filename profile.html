@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EbookPremium - Mein Profil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      .container {
+        max-width: 1200px !important;
+      }
+      .profile-card {
+        transition: all 0.3s ease;
+      }
+      .profile-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+      .hero-gradient {
+        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      }
+      .loading-spinner {
+        border-top-color: #4f46e5;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      .info-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid #f3f4f6;
+      }
+      .info-item:last-child {
+        border-bottom: none;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 flex items-center">
+              <i class="fas fa-book-open text-indigo-600 text-2xl mr-2"></i>
+              <span class="text-xl font-bold text-gray-900">EbookPremium</span>
+            </div>
+          </div>
+          <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+            <a
+              href="/lib"
+              class="text-gray-500 hover:text-gray-700 px-3 py-2 text-sm font-medium"
+            >
+              <i class="fas fa-book mr-2"></i>Bibliothek
+            </a>
+            <a
+              href="/profile"
+              class="text-indigo-600 hover:text-indigo-700 px-3 py-2 text-sm font-medium border-b-2 border-indigo-600"
+            >
+              <i class="fas fa-user mr-2"></i>Profil
+            </a>
+          </div>
+          <div class="flex items-center">
+            <button
+              id="logout-btn"
+              class="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+            >
+              <i class="fas fa-sign-out-alt mr-2"></i>Abmelden
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-gradient">
+      <div class="max-w-7xl mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1
+            class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl"
+          >
+            Mein Profil
+          </h1>
+          <p class="mt-4 max-w-lg mx-auto text-lg text-indigo-100">
+            Ihre Kontoinformationen im Überblick
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loading" class="flex justify-center items-center py-12">
+      <div
+        class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 loading-spinner"
+      ></div>
+      <span class="ml-3 text-gray-600">Profil wird geladen...</span>
+    </div>
+
+    <!-- Profile Content -->
+    <main
+      id="profile-content"
+      class="container mx-auto px-4 py-12 max-w-4xl hidden"
+    >
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Profile Summary Card -->
+        <div class="md:col-span-1">
+          <div
+            class="profile-card bg-white rounded-xl shadow-lg p-6 text-center"
+          >
+            <div
+              class="w-24 h-24 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <i class="fas fa-user text-indigo-600 text-3xl"></i>
+            </div>
+            <h2 id="profile-name" class="text-xl font-bold text-gray-900 mb-2">
+              -
+            </h2>
+            <p id="profile-email" class="text-gray-600 mb-4">-</p>
+            <div
+              class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium inline-block"
+            >
+              <i class="fas fa-check-circle mr-1"></i>
+              Aktives Mitglied
+            </div>
+            <div class="mt-6 pt-6 border-t border-gray-200">
+              <div class="text-sm text-gray-500">
+                <p>Mitglied seit</p>
+                <p id="member-since" class="font-medium text-gray-900">-</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Profile Details -->
+        <div class="md:col-span-2">
+          <div class="profile-card bg-white rounded-xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">
+              <i class="fas fa-user-circle mr-3 text-indigo-600"></i>
+              Persönliche Informationen
+            </h2>
+
+            <div class="space-y-1">
+              <div class="info-item">
+                <span class="text-gray-600 font-medium">
+                  <i class="fas fa-user mr-2 text-gray-400"></i>
+                  Vorname
+                </span>
+                <span id="first-name" class="text-gray-900 font-semibold"
+                  >-</span
+                >
+              </div>
+
+              <div class="info-item">
+                <span class="text-gray-600 font-medium">
+                  <i class="fas fa-user mr-2 text-gray-400"></i>
+                  Nachname
+                </span>
+                <span id="last-name" class="text-gray-900 font-semibold"
+                  >-</span
+                >
+              </div>
+
+              <div class="info-item">
+                <span class="text-gray-600 font-medium">
+                  <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                  E-Mail
+                </span>
+                <span id="email" class="text-gray-900 font-semibold">-</span>
+              </div>
+
+              <div class="info-item">
+                <span class="text-gray-600 font-medium">
+                  <i class="fas fa-home mr-2 text-gray-400"></i>
+                  Adresse
+                </span>
+                <span id="address" class="text-gray-900 font-semibold">-</span>
+              </div>
+
+              <div class="info-item">
+                <span class="text-gray-600 font-medium">
+                  <i class="fas fa-city mr-2 text-gray-400"></i>
+                  Stadt
+                </span>
+                <span id="city" class="text-gray-900 font-semibold">-</span>
+              </div>
+
+              <div class="info-item">
+                <span class="text-gray-600 font-medium">
+                  <i class="fas fa-map-pin mr-2 text-gray-400"></i>
+                  Postleitzahl
+                </span>
+                <span id="postcode" class="text-gray-900 font-semibold">-</span>
+              </div>
+
+              <div class="info-item">
+                <span class="text-gray-600 font-medium">
+                  <i class="fas fa-flag mr-2 text-gray-400"></i>
+                  Land
+                </span>
+                <span id="country" class="text-gray-900 font-semibold">-</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Account Information -->
+          <div class="profile-card bg-white rounded-xl shadow-lg p-8 mt-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">
+              <i class="fas fa-cog mr-3 text-indigo-600"></i>
+              Kontoinformationen
+            </h2>
+
+            <div class="space-y-1">
+              <div class="info-item">
+                <span class="text-gray-600 font-medium">
+                  <i class="fas fa-calendar-alt mr-2 text-gray-400"></i>
+                  Registriert am
+                </span>
+                <span id="created-date" class="text-gray-900 font-semibold"
+                  >-</span
+                >
+              </div>
+
+              <div class="info-item">
+                <span class="text-gray-600 font-medium">
+                  <i class="fas fa-check-circle mr-2 text-gray-400"></i>
+                  Landing Page abgeschlossen
+                </span>
+                <span id="lp-status" class="text-gray-900 font-semibold"
+                  >-</span
+                >
+              </div>
+
+              <div class="info-item">
+                <span class="text-gray-600 font-medium">
+                  <i class="fas fa-crown mr-2 text-gray-400"></i>
+                  Mitgliedschaftsstatus
+                </span>
+                <span class="text-green-600 font-semibold">
+                  <i class="fas fa-check-circle mr-1"></i>
+                  Aktiv
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-16">
+      <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+        <nav
+          class="-mx-5 -my-2 flex flex-wrap justify-center"
+          aria-label="Footer"
+        >
+          <div class="px-5 py-2">
+            <a href="#" class="text-base text-gray-500 hover:text-gray-900"
+              >Datenschutz</a
+            >
+          </div>
+          <div class="px-5 py-2">
+            <a href="#" class="text-base text-gray-500 hover:text-gray-900"
+              >Nutzungsbedingungen</a
+            >
+          </div>
+          <div class="px-5 py-2">
+            <a href="#" class="text-base text-gray-500 hover:text-gray-900"
+              >Support</a
+            >
+          </div>
+        </nav>
+        <p class="mt-8 text-center text-base text-gray-400">
+          &copy; 2025 EbookPremium. Alle Rechte vorbehalten.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // DOM elements
+        const loadingElement = document.getElementById("loading");
+        const profileContent = document.getElementById("profile-content");
+        const logoutBtn = document.getElementById("logout-btn");
+
+        // Profile display elements
+        const profileName = document.getElementById("profile-name");
+        const profileEmail = document.getElementById("profile-email");
+        const memberSince = document.getElementById("member-since");
+        const firstNameSpan = document.getElementById("first-name");
+        const lastNameSpan = document.getElementById("last-name");
+        const emailSpan = document.getElementById("email");
+        const addressSpan = document.getElementById("address");
+        const citySpan = document.getElementById("city");
+        const postcodeSpan = document.getElementById("postcode");
+        const countrySpan = document.getElementById("country");
+        const createdDateSpan = document.getElementById("created-date");
+        const lpStatusSpan = document.getElementById("lp-status");
+
+        // Check authentication and load profile
+        checkAuthAndLoadProfile();
+
+        // Event listeners
+        logoutBtn.addEventListener("click", logout);
+
+        async function checkAuthAndLoadProfile() {
+          try {
+            const response = await fetch("/api/check-auth");
+
+            if (!response.ok) {
+              console.log("Auth check failed, redirecting to login");
+              window.location.href = "/login";
+              return;
+            }
+
+            const authData = await response.json();
+            if (!authData.authenticated) {
+              window.location.href = "/login";
+              return;
+            }
+
+            console.log("Auth check passed, loading profile");
+            await loadProfile();
+          } catch (error) {
+            console.error("Auth check error:", error);
+            window.location.href = "/login";
+          }
+        }
+
+        async function loadProfile() {
+          try {
+            const response = await fetch("/api/profile");
+
+            if (!response.ok) {
+              throw new Error("Failed to load profile");
+            }
+
+            const data = await response.json();
+
+            if (data.success && data.user) {
+              displayProfile(data.user);
+            } else {
+              throw new Error("Invalid profile data");
+            }
+          } catch (error) {
+            console.error("Error loading profile:", error);
+            showError(
+              "Fehler beim Laden des Profils. Bitte versuchen Sie es erneut."
+            );
+          } finally {
+            loadingElement.classList.add("hidden");
+            profileContent.classList.remove("hidden");
+          }
+        }
+
+        function displayProfile(user) {
+          // Update profile summary
+          const fullName = `${user.first_name || ""} ${
+            user.last_name || ""
+          }`.trim();
+          profileName.textContent = fullName || "Unbekannt";
+          profileEmail.textContent = user.email || "Keine E-Mail";
+
+          // Format member since date
+          if (user.created_at) {
+            const date = new Date(user.created_at);
+            memberSince.textContent = date.toLocaleDateString("de-DE", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            });
+          }
+
+          // Update profile details
+          firstNameSpan.textContent = user.first_name || "Nicht angegeben";
+          lastNameSpan.textContent = user.last_name || "Nicht angegeben";
+          emailSpan.textContent = user.email || "Nicht angegeben";
+          addressSpan.textContent = user.address || "Nicht angegeben";
+          citySpan.textContent = user.city || "Nicht angegeben";
+          postcodeSpan.textContent = user.postcode || "Nicht angegeben";
+
+          // Map country codes to names
+          const countryNames = {
+            DE: "Deutschland",
+            AT: "Österreich",
+            CH: "Schweiz",
+          };
+          countrySpan.textContent =
+            countryNames[user.country] || user.country || "Nicht angegeben";
+
+          // Format created date
+          if (user.created_at) {
+            const date = new Date(user.created_at);
+            createdDateSpan.textContent = date.toLocaleDateString("de-DE", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+          } else {
+            createdDateSpan.textContent = "Nicht verfügbar";
+          }
+
+          // LP completion status
+          lpStatusSpan.innerHTML =
+            user.lp_completed === 1
+              ? '<i class="fas fa-check text-green-600 mr-1"></i>Ja'
+              : '<i class="fas fa-times text-red-600 mr-1"></i>Nein';
+        }
+
+        async function logout() {
+          try {
+            const response = await fetch("/api/logout", {
+              method: "POST",
+            });
+
+            if (response.ok) {
+              window.location.href = "/login";
+            } else {
+              throw new Error("Logout failed");
+            }
+          } catch (error) {
+            console.error("Logout error:", error);
+            // Force redirect even if logout request fails
+            window.location.href = "/login";
+          }
+        }
+
+        function showError(message) {
+          // Create notification element
+          const notification = document.createElement("div");
+          notification.className =
+            "fixed top-4 right-4 z-50 p-4 rounded-md shadow-lg max-w-sm bg-red-100 border border-red-400 text-red-700";
+
+          notification.innerHTML = `
+                    <div class="flex items-center">
+                        <i class="fas fa-exclamation-circle mr-2"></i>
+                        <span>${message}</span>
+                        <button class="ml-4 text-sm font-medium underline" onclick="this.parentElement.parentElement.remove()">
+                            Schließen
+                        </button>
+                    </div>
+                `;
+
+          document.body.appendChild(notification);
+
+          // Auto remove after 5 seconds
+          setTimeout(() => {
+            if (notification.parentElement) {
+              notification.remove();
+            }
+          }, 5000);
+        }
+      });
+    </script>
+  </body>
+</html>

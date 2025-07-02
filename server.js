@@ -172,6 +172,9 @@ app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'login.html'));
 });
 
+app.get('/subscription', verifyTokenWithRedirect, (req, res) => {
+  res.sendFile(path.join(__dirname, 'subscription.html'));
+});
 
 app.get('/lp', verifyTokenWithRedirect, (req, res) => {
   res.sendFile(path.join(__dirname, 'lp.html'));
@@ -179,6 +182,10 @@ app.get('/lp', verifyTokenWithRedirect, (req, res) => {
 
 app.get('/lib', verifyTokenWithRedirect, (req, res) => {
   res.sendFile(path.join(__dirname, 'lib.html'));
+});
+
+app.get('/profile', verifyTokenWithRedirect, (req, res) => {
+  res.sendFile(path.join(__dirname, 'profile.html'));
 });
 
 
@@ -466,10 +473,9 @@ app.post('/api/lp-register', async (req, res) => {
   }
 });
 
-
 // Get user profile endpoint
 app.get('/api/profile', verifyToken, (req, res) => {
-  db.get('SELECT id, email, first_name, last_name, address, city, postcode, country, marketing, lp_completed, created_at FROM users WHERE id = ?',
+  db.get('SELECT id, email, first_name, last_name, address, city, postcode, country, marketing, promotion, lp_completed, created_at FROM users WHERE id = ?',
     [req.user.userId],
     (err, user) => {
       if (err) {
@@ -481,6 +487,7 @@ app.get('/api/profile', verifyToken, (req, res) => {
         return res.status(404).json({ error: 'Benutzer nicht gefunden' });
       }
 
+      console.log('Profile loaded for user:', req.user.userId);
       res.json({ success: true, user });
     }
   );

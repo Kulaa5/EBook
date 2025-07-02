@@ -1,345 +1,480 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EbookPremium - Meine Bibliothek</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        .book-card {
-            transition: all 0.3s ease;
+      .book-card {
+        transition: all 0.3s ease;
+      }
+      .container {
+        max-width: 1200px !important;
+      }
+      .book-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+      .modal {
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+      .modal.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .modal-content {
+        transform: translateY(20px);
+        transition: transform 0.3s ease;
+      }
+      .modal.active .modal-content {
+        transform: translateY(0);
+      }
+      .skeleton {
+        animation: pulse 2s infinite ease-in-out;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
         }
-        .container {
-            max-width: 1200px!important;
+        50% {
+          opacity: 0.5;
         }
-        .book-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        .modal {
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .modal-content {
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
-        }
-        .modal.active .modal-content {
-            transform: translateY(0);
-        }
-        .skeleton {
-            animation: pulse 2s infinite ease-in-out;
-        }
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.5;
-            }
-        }
+      }
     </style>
-</head>
-<body class="bg-gray-50 font-sans">
+  </head>
+  <body class="bg-gray-50 font-sans">
     <!-- Navigation -->
     <nav class="bg-white shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0 flex items-center">
-                        <i class="fas fa-book-open text-indigo-600 text-2xl mr-2"></i>
-                        <span class="text-xl font-bold text-gray-900">EbookPremium</span>
-                    </div>
-                </div>
-                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
-                    <a href="#" class="text-gray-900 px-3 py-2 text-sm font-medium">Meine Bibliothek</a>
-                    <a href="#" class="text-gray-500 hover:text-gray-700 px-3 py-2 text-sm font-medium">Mein Konto</a>
-                    <a href="#" class="text-gray-500 hover:text-gray-700 px-3 py-2 text-sm font-medium">Abonnement</a>
-                </div>
-                <div class="flex items-center">
-                    <div class="relative">
-
-                    </div>
-                    <div class="ml-3 relative">
-                        <div>
-                            Name
-                        </div>
-                    </div>
-                </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 flex items-center">
+              <i class="fas fa-book-open text-indigo-600 text-2xl mr-2"></i>
+              <span class="text-xl font-bold text-gray-900">EbookPremium</span>
             </div>
+          </div>
+          <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+            <a href="#" class="text-gray-900 px-3 py-2 text-sm font-medium"
+              >Meine Bibliothek</a
+            >
+            <a
+              href="/profile"
+              class="text-gray-500 hover:text-gray-700 px-3 py-2 text-sm font-medium"
+              >Mein Konto</a
+            >
+            <a
+              href="/subscription"
+              class="text-gray-500 hover:text-gray-700 px-3 py-2 text-sm font-medium"
+              >Abonnement</a
+            >
+          </div>
+          <div class="flex items-center">
+            <div class="relative"></div>
+            <div class="ml-3 relative">
+              <div>Name</div>
+            </div>
+          </div>
         </div>
+      </div>
     </nav>
 
     <!-- Main Content -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- Header -->
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
-            <div class="mb-4 md:mb-0">
-                <h1 class="text-3xl font-bold text-gray-900">Meine Bibliothek</h1>
-                <p class="mt-2 text-sm text-gray-500">Sie haben Zugriff auf über 75.000 E-Books in verschiedenen Formaten</p>
-            </div>
-            <div class="relative w-full md:w-64">
-                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <i class="fas fa-search text-gray-400"></i>
-                </div>
-                <input type="text" id="search" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" placeholder="Bücher suchen...">
-            </div>
+      <!-- Header -->
+      <div
+        class="flex flex-col md:flex-row md:items-center md:justify-between mb-8"
+      >
+        <div class="mb-4 md:mb-0">
+          <h1 class="text-3xl font-bold text-gray-900">Meine Bibliothek</h1>
+          <p class="mt-2 text-sm text-gray-500">
+            Sie haben Zugriff auf über 75.000 E-Books in verschiedenen Formaten
+          </p>
         </div>
+        <div class="relative w-full md:w-64">
+          <div
+            class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+          >
+            <i class="fas fa-search text-gray-400"></i>
+          </div>
+          <input
+            type="text"
+            id="search"
+            class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            placeholder="Bücher suchen..."
+          />
+        </div>
+      </div>
 
-        <!-- Filters -->
-        <div class="mb-8 bg-white p-4 rounded-lg shadow">
-            <div class="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-4 md:space-y-0">
-                <div>
-                    <label for="topic" class="block text-sm font-medium text-gray-700 mb-1">Thema</label>
-                    <input type="text" id="topic" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md" placeholder="Thema eingeben">
-                </div>
-                <div>
-                    <label for="language" class="block text-sm font-medium text-gray-700 mb-1">Sprache</label>
-                    <select id="language" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                        <option value="">Alle Sprachen</option>
-                        <option value="de">Deutsch</option>
-                        <option value="en">Englisch</option>
-                        <option value="fr">Französisch</option>
-                        <option value="es">Spanisch</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="sort" class="block text-sm font-medium text-gray-700 mb-1">Sortieren nach</label>
-                    <select id="sort" class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
-                        <option value="popular">Beliebteste</option>
-                        <option value="ascending">Älteste zuerst</option>
-                        <option value="descending">Neueste zuerst</option>
-                    </select>
-                </div>
-                <div class="flex items-end">
-                    <button id="apply-filters" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Filter anwenden
-                    </button>
-                </div>
-            </div>
+      <!-- Filters -->
+      <div class="mb-8 bg-white p-4 rounded-lg shadow">
+        <div
+          class="flex flex-col md:flex-row md:items-center md:space-x-6 space-y-4 md:space-y-0"
+        >
+          <div>
+            <label
+              for="topic"
+              class="block text-sm font-medium text-gray-700 mb-1"
+              >Thema</label
+            >
+            <input
+              type="text"
+              id="topic"
+              class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+              placeholder="Thema eingeben"
+            />
+          </div>
+          <div>
+            <label
+              for="language"
+              class="block text-sm font-medium text-gray-700 mb-1"
+              >Sprache</label
+            >
+            <select
+              id="language"
+              class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+            >
+              <option value="">Alle Sprachen</option>
+              <option value="de">Deutsch</option>
+              <option value="en">Englisch</option>
+              <option value="fr">Französisch</option>
+              <option value="es">Spanisch</option>
+            </select>
+          </div>
+          <div>
+            <label
+              for="sort"
+              class="block text-sm font-medium text-gray-700 mb-1"
+              >Sortieren nach</label
+            >
+            <select
+              id="sort"
+              class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+            >
+              <option value="popular">Beliebteste</option>
+              <option value="ascending">Älteste zuerst</option>
+              <option value="descending">Neueste zuerst</option>
+            </select>
+          </div>
+          <div class="flex items-end">
+            <button
+              id="apply-filters"
+              class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Filter anwenden
+            </button>
+          </div>
         </div>
+      </div>
 
-        <!-- Books Grid -->
-        <div id="books-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            <!-- Skeleton loading cards -->
-            <div class="book-card bg-white rounded-lg shadow overflow-hidden">
-                <div class="h-48 bg-gray-200 skeleton"></div>
-                <div class="p-4">
-                    <div class="h-6 bg-gray-200 rounded skeleton mb-2"></div>
-                    <div class="h-4 bg-gray-200 rounded skeleton mb-3 w-3/4"></div>
-                    <div class="h-4 bg-gray-200 rounded skeleton mb-3 w-1/2"></div>
-                    <div class="flex justify-between items-center">
-                        <div class="h-6 bg-gray-200 rounded skeleton w-1/3"></div>
-                        <div class="h-6 bg-gray-200 rounded skeleton w-1/3"></div>
-                    </div>
-                </div>
+      <!-- Books Grid -->
+      <div
+        id="books-container"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+      >
+        <!-- Skeleton loading cards -->
+        <div class="book-card bg-white rounded-lg shadow overflow-hidden">
+          <div class="h-48 bg-gray-200 skeleton"></div>
+          <div class="p-4">
+            <div class="h-6 bg-gray-200 rounded skeleton mb-2"></div>
+            <div class="h-4 bg-gray-200 rounded skeleton mb-3 w-3/4"></div>
+            <div class="h-4 bg-gray-200 rounded skeleton mb-3 w-1/2"></div>
+            <div class="flex justify-between items-center">
+              <div class="h-6 bg-gray-200 rounded skeleton w-1/3"></div>
+              <div class="h-6 bg-gray-200 rounded skeleton w-1/3"></div>
             </div>
-            <div class="book-card bg-white rounded-lg shadow overflow-hidden">
-                <div class="h-48 bg-gray-200 skeleton"></div>
-                <div class="p-4">
-                    <div class="h-6 bg-gray-200 rounded skeleton mb-2"></div>
-                    <div class="h-4 bg-gray-200 rounded skeleton mb-3 w-3/4"></div>
-                    <div class="h-4 bg-gray-200 rounded skeleton mb-3 w-1/2"></div>
-                    <div class="flex justify-between items-center">
-                        <div class="h-6 bg-gray-200 rounded skeleton w-1/3"></div>
-                        <div class="h-6 bg-gray-200 rounded skeleton w-1/3"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="book-card bg-white rounded-lg shadow overflow-hidden">
-                <div class="h-48 bg-gray-200 skeleton"></div>
-                <div class="p-4">
-                    <div class="h-6 bg-gray-200 rounded skeleton mb-2"></div>
-                    <div class="h-4 bg-gray-200 rounded skeleton mb-3 w-3/4"></div>
-                    <div class="h-4 bg-gray-200 rounded skeleton mb-3 w-1/2"></div>
-                    <div class="flex justify-between items-center">
-                        <div class="h-6 bg-gray-200 rounded skeleton w-1/3"></div>
-                        <div class="h-6 bg-gray-200 rounded skeleton w-1/3"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="book-card bg-white rounded-lg shadow overflow-hidden">
-                <div class="h-48 bg-gray-200 skeleton"></div>
-                <div class="p-4">
-                    <div class="h-6 bg-gray-200 rounded skeleton mb-2"></div>
-                    <div class="h-4 bg-gray-200 rounded skeleton mb-3 w-3/4"></div>
-                    <div class="h-4 bg-gray-200 rounded skeleton mb-3 w-1/2"></div>
-                    <div class="flex justify-between items-center">
-                        <div class="h-6 bg-gray-200 rounded skeleton w-1/3"></div>
-                        <div class="h-6 bg-gray-200 rounded skeleton w-1/3"></div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+        <div class="book-card bg-white rounded-lg shadow overflow-hidden">
+          <div class="h-48 bg-gray-200 skeleton"></div>
+          <div class="p-4">
+            <div class="h-6 bg-gray-200 rounded skeleton mb-2"></div>
+            <div class="h-4 bg-gray-200 rounded skeleton mb-3 w-3/4"></div>
+            <div class="h-4 bg-gray-200 rounded skeleton mb-3 w-1/2"></div>
+            <div class="flex justify-between items-center">
+              <div class="h-6 bg-gray-200 rounded skeleton w-1/3"></div>
+              <div class="h-6 bg-gray-200 rounded skeleton w-1/3"></div>
+            </div>
+          </div>
+        </div>
+        <div class="book-card bg-white rounded-lg shadow overflow-hidden">
+          <div class="h-48 bg-gray-200 skeleton"></div>
+          <div class="p-4">
+            <div class="h-6 bg-gray-200 rounded skeleton mb-2"></div>
+            <div class="h-4 bg-gray-200 rounded skeleton mb-3 w-3/4"></div>
+            <div class="h-4 bg-gray-200 rounded skeleton mb-3 w-1/2"></div>
+            <div class="flex justify-between items-center">
+              <div class="h-6 bg-gray-200 rounded skeleton w-1/3"></div>
+              <div class="h-6 bg-gray-200 rounded skeleton w-1/3"></div>
+            </div>
+          </div>
+        </div>
+        <div class="book-card bg-white rounded-lg shadow overflow-hidden">
+          <div class="h-48 bg-gray-200 skeleton"></div>
+          <div class="p-4">
+            <div class="h-6 bg-gray-200 rounded skeleton mb-2"></div>
+            <div class="h-4 bg-gray-200 rounded skeleton mb-3 w-3/4"></div>
+            <div class="h-4 bg-gray-200 rounded skeleton mb-3 w-1/2"></div>
+            <div class="flex justify-between items-center">
+              <div class="h-6 bg-gray-200 rounded skeleton w-1/3"></div>
+              <div class="h-6 bg-gray-200 rounded skeleton w-1/3"></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        <!-- Pagination -->
-        <div class="mt-8 flex items-center justify-between">
-            <div>
-                <p class="text-sm text-gray-700" id="pagination-info">
-                    Lade Bücher...
-                </p>
-            </div>
-            <div class="flex space-x-2">
-                <button id="prev-page" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-                    Zurück
-                </button>
-                <button id="next-page" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-                    Weiter
-                </button>
-            </div>
+      <!-- Pagination -->
+      <div class="mt-8 flex items-center justify-between">
+        <div>
+          <p class="text-sm text-gray-700" id="pagination-info">
+            Lade Bücher...
+          </p>
         </div>
+        <div class="flex space-x-2">
+          <button
+            id="prev-page"
+            class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled
+          >
+            Zurück
+          </button>
+          <button
+            id="next-page"
+            class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled
+          >
+            Weiter
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- Book Details Modal -->
-    <div id="book-modal" class="modal fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <!-- Background overlay -->
-            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+    <div
+      id="book-modal"
+      class="modal fixed z-10 inset-0 overflow-y-auto hidden"
+      aria-labelledby="modal-title"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div
+        class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+      >
+        <!-- Background overlay -->
+        <div
+          class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+          aria-hidden="true"
+        ></div>
 
-            <!-- Modal panel -->
-            <div class="modal-content inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
-                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <div class="sm:flex sm:items-start">
-                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
-                            <div class="flex justify-between items-start">
-                                <div>
-                                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">Buchtitel</h3>
-                                    <p class="text-sm text-gray-500 mt-1" id="modal-author">Autor</p>
-                                </div>
-                                <button type="button" class="close-modal text-gray-400 hover:text-gray-500">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="mt-4">
-                                <div class="flex items-center mb-2">
-                                    <div class="flex">
-                                        <i class="fas fa-download text-indigo-400"></i>
-                                    </div>
-                                    <span class="ml-2 text-sm text-gray-500" id="modal-downloads">0 Downloads</span>
-                                </div>
-                                
-                                <div class="flex flex-wrap gap-2 mb-4">
-                                    <span class="text-xs font-medium px-2 py-1 rounded bg-indigo-100 text-indigo-800" id="modal-language">Sprache</span>
-                                    <span class="text-xs font-medium px-2 py-1 rounded bg-green-100 text-green-800" id="modal-subjects">Themen</span>
-                                    <span class="text-xs font-medium px-2 py-1 rounded bg-purple-100 text-purple-800" id="modal-bookshelves">Bücherregale</span>
-                                </div>
-                                
-                                <p class="text-sm text-gray-500 mb-4" id="modal-description">
-                                    Keine Beschreibung verfügbar.
-                                </p>
-                                
-                                <div class="border-t border-gray-200 pt-4">
-                                    <h4 class="text-sm font-medium text-gray-900 mb-2">Verfügbare Formate</h4>
-                                    <div class="grid grid-cols-2 gap-4" id="formats-container">
-                                        <!-- Formats will be added here dynamically -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <!-- Modal panel -->
+        <div
+          class="modal-content inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full"
+        >
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div class="sm:flex sm:items-start">
+              <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left w-full">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <h3
+                      class="text-lg leading-6 font-medium text-gray-900"
+                      id="modal-title"
+                    >
+                      Buchtitel
+                    </h3>
+                    <p class="text-sm text-gray-500 mt-1" id="modal-author">
+                      Autor
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    class="close-modal text-gray-400 hover:text-gray-500"
+                  >
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+
+                <div class="mt-4">
+                  <div class="flex items-center mb-2">
+                    <div class="flex">
+                      <i class="fas fa-download text-indigo-400"></i>
                     </div>
+                    <span
+                      class="ml-2 text-sm text-gray-500"
+                      id="modal-downloads"
+                      >0 Downloads</span
+                    >
+                  </div>
+
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    <span
+                      class="text-xs font-medium px-2 py-1 rounded bg-indigo-100 text-indigo-800"
+                      id="modal-language"
+                      >Sprache</span
+                    >
+                    <span
+                      class="text-xs font-medium px-2 py-1 rounded bg-green-100 text-green-800"
+                      id="modal-subjects"
+                      >Themen</span
+                    >
+                    <span
+                      class="text-xs font-medium px-2 py-1 rounded bg-purple-100 text-purple-800"
+                      id="modal-bookshelves"
+                      >Bücherregale</span
+                    >
+                  </div>
+
+                  <p class="text-sm text-gray-500 mb-4" id="modal-description">
+                    Keine Beschreibung verfügbar.
+                  </p>
+
+                  <div class="border-t border-gray-200 pt-4">
+                    <h4 class="text-sm font-medium text-gray-900 mb-2">
+                      Verfügbare Formate
+                    </h4>
+                    <div class="grid grid-cols-2 gap-4" id="formats-container">
+                      <!-- Formats will be added here dynamically -->
+                    </div>
+                  </div>
                 </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="button" class="close-modal w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm">
-                        Schließen
-                    </button>
-                </div>
+              </div>
             </div>
+          </div>
+          <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+            <button
+              type="button"
+              class="close-modal w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              Schließen
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Download Modal -->
-    <div id="download-modal" class="modal fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="download-modal-title" role="dialog" aria-modal="true">
-        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <!-- Background overlay -->
-            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+    <div
+      id="download-modal"
+      class="modal fixed z-10 inset-0 overflow-y-auto hidden"
+      aria-labelledby="download-modal-title"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div
+        class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+      >
+        <!-- Background overlay -->
+        <div
+          class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+          aria-hidden="true"
+        ></div>
 
-            <!-- Modal panel -->
-            <div class="modal-content inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-                <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <div class="sm:flex sm:items-start">
-                        <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
-                            <i class="fas fa-download text-green-600"></i>
-                        </div>
-                        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                            <h3 class="text-lg leading-6 font-medium text-gray-900" id="download-modal-title">Download gestartet</h3>
-                            <div class="mt-2">
-                                <p class="text-sm text-gray-500" id="download-modal-message">
-                                    Ihr Download von <span class="font-medium" id="download-book-title">Buchtitel</span> im <span class="font-medium" id="download-format">PDF</span>-Format wurde gestartet.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Modal panel -->
+        <div
+          class="modal-content inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+        >
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div class="sm:flex sm:items-start">
+              <div
+                class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10"
+              >
+                <i class="fas fa-download text-green-600"></i>
+              </div>
+              <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                <h3
+                  class="text-lg leading-6 font-medium text-gray-900"
+                  id="download-modal-title"
+                >
+                  Download gestartet
+                </h3>
+                <div class="mt-2">
+                  <p class="text-sm text-gray-500" id="download-modal-message">
+                    Ihr Download von
+                    <span class="font-medium" id="download-book-title"
+                      >Buchtitel</span
+                    >
+                    im
+                    <span class="font-medium" id="download-format">PDF</span
+                    >-Format wurde gestartet.
+                  </p>
                 </div>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                    <button type="button" class="close-download-modal mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                        Schließen
-                    </button>
-                </div>
+              </div>
             </div>
+          </div>
+          <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+            <button
+              type="button"
+              class="close-download-modal mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              Schließen
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // API configuration
-            const API_BASE_URL = 'https://gutendex.com/books/';
-            let currentPageUrl = API_BASE_URL;
-            let nextPageUrl = null;
-            let prevPageUrl = null;
-            let isLoading = false;
+      document.addEventListener("DOMContentLoaded", function () {
+        // API configuration
+        const API_BASE_URL = "https://gutendex.com/books/";
+        let currentPageUrl = API_BASE_URL;
+        let nextPageUrl = null;
+        let prevPageUrl = null;
+        let isLoading = false;
 
-            // DOM elements
-            const booksContainer = document.getElementById('books-container');
-            const paginationInfo = document.getElementById('pagination-info');
-            const prevPageBtn = document.getElementById('prev-page');
-            const nextPageBtn = document.getElementById('next-page');
-            const searchInput = document.getElementById('search');
-            const topicInput = document.getElementById('topic');
-            const languageSelect = document.getElementById('language');
-            const sortSelect = document.getElementById('sort');
-            const applyFiltersBtn = document.getElementById('apply-filters');
-            
-            // Modal elements
-            const modal = document.getElementById('book-modal');
-            const downloadModal = document.getElementById('download-modal');
-            const closeModalButtons = document.querySelectorAll('.close-modal');
-            const closeDownloadModalButton = document.querySelector('.close-download-modal');
+        // DOM elements
+        const booksContainer = document.getElementById("books-container");
+        const paginationInfo = document.getElementById("pagination-info");
+        const prevPageBtn = document.getElementById("prev-page");
+        const nextPageBtn = document.getElementById("next-page");
+        const searchInput = document.getElementById("search");
+        const topicInput = document.getElementById("topic");
+        const languageSelect = document.getElementById("language");
+        const sortSelect = document.getElementById("sort");
+        const applyFiltersBtn = document.getElementById("apply-filters");
 
-            // Format mapping for display
-            const formatDisplayNames = {
-                'text/html': 'HTML',
-                'application/epub+zip': 'EPUB',
-                'application/x-mobipocket-ebook': 'MOBI (Kindle)',
-                'text/plain; charset=us-ascii': 'Plain Text',
-                'application/rdf+xml': 'RDF',
-                'image/jpeg': 'Cover Image',
-                'application/octet-stream': 'ZIP'
-            };
+        // Modal elements
+        const modal = document.getElementById("book-modal");
+        const downloadModal = document.getElementById("download-modal");
+        const closeModalButtons = document.querySelectorAll(".close-modal");
+        const closeDownloadModalButton = document.querySelector(
+          ".close-download-modal"
+        );
 
-            // Format icons
-            const formatIcons = {
-                'text/html': 'fas fa-code',
-                'application/epub+zip': 'fas fa-book-open',
-                'application/x-mobipocket-ebook': 'fas fa-tablet-alt',
-                'text/plain; charset=us-ascii': 'fas fa-file-alt',
-                'application/rdf+xml': 'fas fa-file-code',
-                'image/jpeg': 'fas fa-image',
-                'application/octet-stream': 'fas fa-file-archive'
-            };
+        // Format mapping for display
+        const formatDisplayNames = {
+          "text/html": "HTML",
+          "application/epub+zip": "EPUB",
+          "application/x-mobipocket-ebook": "MOBI (Kindle)",
+          "text/plain; charset=us-ascii": "Plain Text",
+          "application/rdf+xml": "RDF",
+          "image/jpeg": "Cover Image",
+          "application/octet-stream": "ZIP",
+        };
 
-            // Fetch books from API
-            async function fetchBooks(url) {
-                if (isLoading) return;
-                isLoading = true;
-                
-                try {
-                    // Show loading state
-                    booksContainer.innerHTML = `
+        // Format icons
+        const formatIcons = {
+          "text/html": "fas fa-code",
+          "application/epub+zip": "fas fa-book-open",
+          "application/x-mobipocket-ebook": "fas fa-tablet-alt",
+          "text/plain; charset=us-ascii": "fas fa-file-alt",
+          "application/rdf+xml": "fas fa-file-code",
+          "image/jpeg": "fas fa-image",
+          "application/octet-stream": "fas fa-file-archive",
+        };
+
+        // Fetch books from API
+        async function fetchBooks(url) {
+          if (isLoading) return;
+          isLoading = true;
+
+          try {
+            // Show loading state
+            booksContainer.innerHTML = `
                         <div class="book-card bg-white rounded-lg shadow overflow-hidden">
                             <div class="h-48 bg-gray-200 skeleton"></div>
                             <div class="p-4">
@@ -353,40 +488,42 @@
                             </div>
                         </div>
                     `.repeat(4);
-                    
-                    paginationInfo.textContent = 'Lade Bücher...';
-                    prevPageBtn.disabled = true;
-                    nextPageBtn.disabled = true;
-                    
-                    const response = await fetch(url);
-                    const data = await response.json();
-                    
-                    // Update pagination URLs
-                    nextPageUrl = data.next;
-                    prevPageUrl = data.previous;
-                    
-                    // Update pagination info
-                    const startItem = prevPageUrl ? parseInt(new URL(prevPageUrl).searchParams.get('page')) * 32 || 32 : 1;
-                    const endItem = startItem + data.results.length - 1;
-                    
-                    paginationInfo.textContent = `Zeige ${startItem} bis ${endItem} von ${data.count} Büchern`;
-                    
-                    // Enable/disable pagination buttons
-                    prevPageBtn.disabled = !prevPageUrl;
-                    nextPageBtn.disabled = !nextPageUrl;
-                    
-                    // Clear books container
-                    booksContainer.innerHTML = '';
-                    
-                    // Display books
-                    data.results.forEach(book => {
-                        const bookCard = createBookCard(book);
-                        booksContainer.appendChild(bookCard);
-                    });
-                    
-                } catch (error) {
-                    console.error('Error fetching books:', error);
-                    booksContainer.innerHTML = `
+
+            paginationInfo.textContent = "Lade Bücher...";
+            prevPageBtn.disabled = true;
+            nextPageBtn.disabled = true;
+
+            const response = await fetch(url);
+            const data = await response.json();
+
+            // Update pagination URLs
+            nextPageUrl = data.next;
+            prevPageUrl = data.previous;
+
+            // Update pagination info
+            const startItem = prevPageUrl
+              ? parseInt(new URL(prevPageUrl).searchParams.get("page")) * 32 ||
+                32
+              : 1;
+            const endItem = startItem + data.results.length - 1;
+
+            paginationInfo.textContent = `Zeige ${startItem} bis ${endItem} von ${data.count} Büchern`;
+
+            // Enable/disable pagination buttons
+            prevPageBtn.disabled = !prevPageUrl;
+            nextPageBtn.disabled = !nextPageUrl;
+
+            // Clear books container
+            booksContainer.innerHTML = "";
+
+            // Display books
+            data.results.forEach((book) => {
+              const bookCard = createBookCard(book);
+              booksContainer.appendChild(bookCard);
+            });
+          } catch (error) {
+            console.error("Error fetching books:", error);
+            booksContainer.innerHTML = `
                         <div class="col-span-full text-center py-8">
                             <i class="fas fa-exclamation-triangle text-red-500 text-4xl mb-4"></i>
                             <p class="text-lg font-medium text-gray-900">Fehler beim Laden der Bücher</p>
@@ -396,37 +533,50 @@
                             </button>
                         </div>
                     `;
-                    paginationInfo.textContent = 'Fehler beim Laden der Bücher';
-                } finally {
-                    isLoading = false;
-                }
-            }
-            
-            // Create book card element
-            function createBookCard(book) {
-                const card = document.createElement('div');
-                card.className = 'book-card bg-white rounded-lg shadow overflow-hidden cursor-pointer';
-                card.dataset.bookId = book.id;
-                
-                // Get author name
-                const authorName = book.authors.length > 0 ? 
-                    book.authors[0].name : 'Unbekannter Autor';
-                
-                // Get first subject or bookshelf
-                const firstSubject = book.subjects.length > 0 ? 
-                    book.subjects[0].split(' -- ')[0] : 
-                    (book.bookshelves.length > 0 ? book.bookshelves[0] : 'Allgemein');
-                
-                // Get cover image or placeholder
-                const coverImage = book.formats['image/jpeg'] || 
-                    `https://placehold.co/300x400?text=${encodeURIComponent(book.title.substring(0, 15))}`;
-                
-                card.innerHTML = `
+            paginationInfo.textContent = "Fehler beim Laden der Bücher";
+          } finally {
+            isLoading = false;
+          }
+        }
+
+        // Create book card element
+        function createBookCard(book) {
+          const card = document.createElement("div");
+          card.className =
+            "book-card bg-white rounded-lg shadow overflow-hidden cursor-pointer";
+          card.dataset.bookId = book.id;
+
+          // Get author name
+          const authorName =
+            book.authors.length > 0
+              ? book.authors[0].name
+              : "Unbekannter Autor";
+
+          // Get first subject or bookshelf
+          const firstSubject =
+            book.subjects.length > 0
+              ? book.subjects[0].split(" -- ")[0]
+              : book.bookshelves.length > 0
+              ? book.bookshelves[0]
+              : "Allgemein";
+
+          // Get cover image or placeholder
+          const coverImage =
+            book.formats["image/jpeg"] ||
+            `https://placehold.co/300x400?text=${encodeURIComponent(
+              book.title.substring(0, 15)
+            )}`;
+
+          card.innerHTML = `
                     <div class="h-48 bg-gray-100 flex items-center justify-center overflow-hidden">
-                        <img src="${coverImage}" alt="${book.title}" class="w-full h-full object-cover">
+                        <img src="${coverImage}" alt="${
+            book.title
+          }" class="w-full h-full object-cover">
                     </div>
                     <div class="p-4">
-                        <h3 class="text-lg font-medium text-gray-900 mb-1 truncate">${book.title}</h3>
+                        <h3 class="text-lg font-medium text-gray-900 mb-1 truncate">${
+                          book.title
+                        }</h3>
                         <p class="text-sm text-gray-500 mb-2 truncate">${authorName}</p>
                         <div class="flex items-center mb-3">
                             <div class="flex">
@@ -442,162 +592,184 @@
                         </div>
                     </div>
                 `;
-                
-                // Add click event to open modal
-                card.addEventListener('click', () => openBookModal(book));
-                
-                return card;
-            }
-            
-            // Open book details modal
-            function openBookModal(book) {
-                // Get author info
-                const authorInfo = book.authors.length > 0 ? 
-                    `${book.authors[0].name} (${book.authors[0].birth_year || '?'}-${book.authors[0].death_year || '?'})` : 
-                    'Unbekannter Autor';
-                
-                // Get description (use first summary if available)
-                const description = book.summaries && book.summaries.length > 0 ? 
-                    book.summaries[0] : 'Keine Beschreibung verfügbar.';
-                
-                // Set modal content
-                document.getElementById('modal-title').textContent = book.title;
-                document.getElementById('modal-author').textContent = authorInfo;
-                document.getElementById('modal-downloads').textContent = `${book.download_count.toLocaleString()} Downloads`;
-                document.getElementById('modal-language').textContent = book.languages.join(', ');
-                document.getElementById('modal-subjects').textContent = `${book.subjects.length} Themen`;
-                document.getElementById('modal-bookshelves').textContent = `${book.bookshelves.length} Bücherregale`;
-                document.getElementById('modal-description').textContent = description;
-                
-                // Clear formats container
-                const formatsContainer = document.getElementById('formats-container');
-                formatsContainer.innerHTML = '';
-                
-                // Add available formats
-                for (const [format, url] of Object.entries(book.formats)) {
-                    if (formatDisplayNames[format]) {
-                        const formatDiv = document.createElement('div');
-                        formatDiv.className = 'flex items-center justify-between p-3 border border-gray-200 rounded-md';
-                        
-                        formatDiv.innerHTML = `
+
+          // Add click event to open modal
+          card.addEventListener("click", () => openBookModal(book));
+
+          return card;
+        }
+
+        // Open book details modal
+        function openBookModal(book) {
+          // Get author info
+          const authorInfo =
+            book.authors.length > 0
+              ? `${book.authors[0].name} (${
+                  book.authors[0].birth_year || "?"
+                }-${book.authors[0].death_year || "?"})`
+              : "Unbekannter Autor";
+
+          // Get description (use first summary if available)
+          const description =
+            book.summaries && book.summaries.length > 0
+              ? book.summaries[0]
+              : "Keine Beschreibung verfügbar.";
+
+          // Set modal content
+          document.getElementById("modal-title").textContent = book.title;
+          document.getElementById("modal-author").textContent = authorInfo;
+          document.getElementById(
+            "modal-downloads"
+          ).textContent = `${book.download_count.toLocaleString()} Downloads`;
+          document.getElementById("modal-language").textContent =
+            book.languages.join(", ");
+          document.getElementById(
+            "modal-subjects"
+          ).textContent = `${book.subjects.length} Themen`;
+          document.getElementById(
+            "modal-bookshelves"
+          ).textContent = `${book.bookshelves.length} Bücherregale`;
+          document.getElementById("modal-description").textContent =
+            description;
+
+          // Clear formats container
+          const formatsContainer = document.getElementById("formats-container");
+          formatsContainer.innerHTML = "";
+
+          // Add available formats
+          for (const [format, url] of Object.entries(book.formats)) {
+            if (formatDisplayNames[format]) {
+              const formatDiv = document.createElement("div");
+              formatDiv.className =
+                "flex items-center justify-between p-3 border border-gray-200 rounded-md";
+
+              formatDiv.innerHTML = `
                             <div>
-                                <p class="text-sm font-medium text-gray-900">${formatDisplayNames[format]}</p>
-                                <p class="text-xs text-gray-500">${format.split(';')[0]}</p>
+                                <p class="text-sm font-medium text-gray-900">${
+                                  formatDisplayNames[format]
+                                }</p>
+                                <p class="text-xs text-gray-500">${
+                                  format.split(";")[0]
+                                }</p>
                             </div>
-                            <a href="${url}" target="_blank" class="download-btn inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" data-format="${format}" data-book-title="${book.title}">
+                            <a href="${url}" target="_blank" class="download-btn inline-flex items-center px-3 py-1 border border-transparent text-xs font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" data-format="${format}" data-book-title="${
+                book.title
+              }">
                                 Herunterladen
                             </a>
                         `;
-                        
-                        formatsContainer.appendChild(formatDiv);
-                    }
-                }
-                
-                // Show modal
-                modal.classList.remove('hidden');
-                modal.classList.add('active');
+
+              formatsContainer.appendChild(formatDiv);
             }
-            
-            // Open download confirmation modal
-            function openDownloadModal(format, bookTitle) {
-                document.getElementById('download-book-title').textContent = bookTitle;
-                document.getElementById('download-format').textContent = formatDisplayNames[format] || format;
-                
-                // Close book details modal
-                modal.classList.remove('active');
-                modal.classList.add('hidden');
-                
-                // Show download modal
-                downloadModal.classList.remove('hidden');
-                downloadModal.classList.add('active');
-            }
-            
-            // Build API URL with current filters
-            function buildApiUrl() {
-                const url = new URL(API_BASE_URL);
-                const params = new URLSearchParams();
-                
-                // Add search query if exists
-                if (searchInput.value.trim()) {
-                    params.append('search', searchInput.value.trim());
-                }
-                
-                // Add topic if exists
-                if (topicInput.value.trim()) {
-                    params.append('topic', topicInput.value.trim());
-                }
-                
-                // Add language filter if selected
-                if (languageSelect.value) {
-                    params.append('languages', languageSelect.value);
-                }
-                
-                // Add sort option
-                if (sortSelect.value === 'ascending') {
-                    params.append('sort', 'ascending');
-                } else if (sortSelect.value === 'descending') {
-                    params.append('sort', 'descending');
-                }
-                
-                url.search = params.toString();
-                return url.toString();
-            }
-            
-            // Event listeners
-            prevPageBtn.addEventListener('click', () => {
-                if (prevPageUrl) {
-                    currentPageUrl = prevPageUrl;
-                    fetchBooks(currentPageUrl);
-                }
-            });
-            
-            nextPageBtn.addEventListener('click', () => {
-                if (nextPageUrl) {
-                    currentPageUrl = nextPageUrl;
-                    fetchBooks(currentPageUrl);
-                }
-            });
-            
-            applyFiltersBtn.addEventListener('click', () => {
-                currentPageUrl = buildApiUrl();
-                fetchBooks(currentPageUrl);
-            });
-            
-            searchInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    currentPageUrl = buildApiUrl();
-                    fetchBooks(currentPageUrl);
-                }
-            });
-            
-            // Close modals
-            closeModalButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    modal.classList.remove('active');
-                    modal.classList.add('hidden');
-                });
-            });
-            
-            closeDownloadModalButton.addEventListener('click', () => {
-                downloadModal.classList.remove('active');
-                downloadModal.classList.add('hidden');
-            });
-            
-            // Close modals when clicking outside
-            window.addEventListener('click', (event) => {
-                if (event.target === modal) {
-                    modal.classList.remove('active');
-                    modal.classList.add('hidden');
-                }
-                if (event.target === downloadModal) {
-                    downloadModal.classList.remove('active');
-                    downloadModal.classList.add('hidden');
-                }
-            });
-            
-            // Initial load
+          }
+
+          // Show modal
+          modal.classList.remove("hidden");
+          modal.classList.add("active");
+        }
+
+        // Open download confirmation modal
+        function openDownloadModal(format, bookTitle) {
+          document.getElementById("download-book-title").textContent =
+            bookTitle;
+          document.getElementById("download-format").textContent =
+            formatDisplayNames[format] || format;
+
+          // Close book details modal
+          modal.classList.remove("active");
+          modal.classList.add("hidden");
+
+          // Show download modal
+          downloadModal.classList.remove("hidden");
+          downloadModal.classList.add("active");
+        }
+
+        // Build API URL with current filters
+        function buildApiUrl() {
+          const url = new URL(API_BASE_URL);
+          const params = new URLSearchParams();
+
+          // Add search query if exists
+          if (searchInput.value.trim()) {
+            params.append("search", searchInput.value.trim());
+          }
+
+          // Add topic if exists
+          if (topicInput.value.trim()) {
+            params.append("topic", topicInput.value.trim());
+          }
+
+          // Add language filter if selected
+          if (languageSelect.value) {
+            params.append("languages", languageSelect.value);
+          }
+
+          // Add sort option
+          if (sortSelect.value === "ascending") {
+            params.append("sort", "ascending");
+          } else if (sortSelect.value === "descending") {
+            params.append("sort", "descending");
+          }
+
+          url.search = params.toString();
+          return url.toString();
+        }
+
+        // Event listeners
+        prevPageBtn.addEventListener("click", () => {
+          if (prevPageUrl) {
+            currentPageUrl = prevPageUrl;
             fetchBooks(currentPageUrl);
+          }
         });
+
+        nextPageBtn.addEventListener("click", () => {
+          if (nextPageUrl) {
+            currentPageUrl = nextPageUrl;
+            fetchBooks(currentPageUrl);
+          }
+        });
+
+        applyFiltersBtn.addEventListener("click", () => {
+          currentPageUrl = buildApiUrl();
+          fetchBooks(currentPageUrl);
+        });
+
+        searchInput.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            currentPageUrl = buildApiUrl();
+            fetchBooks(currentPageUrl);
+          }
+        });
+
+        // Close modals
+        closeModalButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            modal.classList.remove("active");
+            modal.classList.add("hidden");
+          });
+        });
+
+        closeDownloadModalButton.addEventListener("click", () => {
+          downloadModal.classList.remove("active");
+          downloadModal.classList.add("hidden");
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener("click", (event) => {
+          if (event.target === modal) {
+            modal.classList.remove("active");
+            modal.classList.add("hidden");
+          }
+          if (event.target === downloadModal) {
+            downloadModal.classList.remove("active");
+            downloadModal.classList.add("hidden");
+          }
+        });
+
+        // Initial load
+        fetchBooks(currentPageUrl);
+      });
     </script>
-</body>
+  </body>
 </html>
