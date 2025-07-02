@@ -188,6 +188,14 @@ app.get('/profile', verifyTokenWithRedirect, (req, res) => {
   res.sendFile(path.join(__dirname, 'profile.html'));
 });
 
+app.get('/agb', (req, res) => {
+  res.sendFile(path.join(__dirname, 'agb.html'));
+});
+
+app.get('/sepa', (req, res) => {
+  res.sendFile(path.join(__dirname, 'sepa.html'));
+});
+
 
 
 // Registration endpoint 
