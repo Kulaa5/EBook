@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EbookPremium - Jetzt anmelden</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      .form-step {
+        display: none;
+      }
+      .container {
+        max-width: 1200px !important;
+      }
+      .form-step.active {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .input-highlight {
+        transition: all 0.3s ease;
+      }
+      .input-highlight:focus-within {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="bg-indigo-700 text-white">
+      <div class="container mx-auto px-4 py-6">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center">
+            <i class="fas fa-book-open text-2xl mr-3"></i>
+            <span class="text-2xl font-bold">EbookPremium</span>
+          </div>
+          <a href="/login" class="text-white hover:text-indigo-200"
+            >Bereits Mitglied? Anmelden</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section
+      class="py-12 bg-gradient-to-r from-indigo-600 to-purple-600 text-white"
+    >
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-4xl font-bold mb-6">
+          Entdecken Sie über 100.000 Ebooks
+        </h1>
+        <p class="text-xl mb-8 max-w-3xl mx-auto">
+          Unbegrenzter Zugriff auf die beste Sammlung von Ebooks in allen
+          Genres. PDF, EPUB und mehr. Jetzt mit 3 Tagen kostenlos testen!
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mt-12">
+          <div class="bg-white bg-opacity-10 p-6 rounded-lg backdrop-blur-sm">
+            <i class="fas fa-book text-3xl mb-4"></i>
+            <h3 class="text-xl font-semibold mb-2">Alle Genres</h3>
+            <p>
+              Belletristik, Wissenschaft, Business, Krimis, Fantasy und mehr
+            </p>
+          </div>
+          <div class="bg-white bg-opacity-10 p-6 rounded-lg backdrop-blur-sm">
+            <i class="fas fa-file-pdf text-3xl mb-4"></i>
+            <h3 class="text-xl font-semibold mb-2">Mehrere Formate</h3>
+            <p>PDF, EPUB, MOBI und mehr - für alle Geräte optimiert</p>
+          </div>
+          <div class="bg-white bg-opacity-10 p-6 rounded-lg backdrop-blur-sm">
+            <i class="fas fa-euro-sign text-3xl mb-4"></i>
+            <h3 class="text-xl font-semibold mb-2">Nur 99€/Jahr</h3>
+            <p>Nach 3 Tagen kostenlosem Test. Jederzeit kündbar</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Form Container -->
+    <main class="container mx-auto px-4 py-16 max-w-4xl">
+      <!-- Progress Steps -->
+      <div class="flex justify-between mb-12 relative">
+        <div
+          class="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -z-10"
+        ></div>
+        <div
+          id="progress-bar"
+          class="absolute top-1/2 left-0 h-1 bg-indigo-600 -z-10 transition-all duration-500"
+          style="width: 0%"
+        ></div>
+
+        <div class="step flex flex-col items-center" data-step="1">
+          <div
+            class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold mb-2"
+          >
+            1
+          </div>
+          <span class="text-sm font-medium">Kontakt</span>
+        </div>
+        <div class="step flex flex-col items-center" data-step="2">
+          <div
+            class="w-10 h-10 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-bold mb-2"
+          >
+            2
+          </div>
+          <span class="text-sm font-medium text-gray-600">Rechnung</span>
+        </div>
+        <div class="step flex flex-col items-center" data-step="3">
+          <div
+            class="w-10 h-10 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-bold mb-2"
+          >
+            3
+          </div>
+          <span class="text-sm font-medium text-gray-600">Bestätigung</span>
+        </div>
+      </div>
+
+      <!-- Form 1: Initial Contact -->
+      <div
+        id="form1"
+        class="form-step active bg-white rounded-xl shadow-lg p-8"
+      >
+        <h2 class="text-2xl font-bold mb-6">
+          Starten Sie Ihre kostenlose Testphase
+        </h2>
+
+        <form id="contact-form" class="space-y-6">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div
+              class="input-highlight border border-gray-300 rounded-lg px-4 py-3"
+            >
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Vorname</label
+              >
+              <input
+                type="text"
+                name="firstname"
+                required
+                class="w-full focus:outline-none"
+              />
+            </div>
+            <div
+              class="input-highlight border border-gray-300 rounded-lg px-4 py-3"
+            >
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Nachname</label
+              >
+              <input
+                type="text"
+                name="lastname"
+                required
+                class="w-full focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div
+            class="input-highlight border border-gray-300 rounded-lg px-4 py-3"
+          >
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >E-Mail</label
+            >
+            <input
+              type="email"
+              name="email"
+              required
+              class="w-full focus:outline-none"
+              placeholder="max.mustermann@beispiel.de"
+            />
+          </div>
+
+          <div class="flex items-start">
+            <div class="flex items-center h-5">
+              <input
+                id="promotions"
+                name="promotions"
+                type="checkbox"
+                class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              />
+            </div>
+            <div class="ml-3 text-sm">
+              <label for="promotions" class="font-medium text-gray-700"
+                >Ich möchte über neue Ebooks und Angebote informiert
+                werden</label
+              >
+            </div>
+          </div>
+
+          <div class="pt-4">
+            <button
+              type="button"
+              onclick="nextForm()"
+              class="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Jetzt anmelden <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Form 2: Billing Details -->
+      <div id="form2" class="form-step bg-white rounded-xl shadow-lg p-8">
+        <h2 class="text-2xl font-bold mb-6">Rechnungs- und Zahlungsdetails</h2>
+
+        <form id="billing-form" class="space-y-6">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div
+              class="input-highlight border border-gray-300 rounded-lg px-4 py-3"
+            >
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Vorname</label
+              >
+              <input
+                type="text"
+                id="billing-firstname"
+                required
+                class="w-full focus:outline-none"
+              />
+            </div>
+            <div
+              class="input-highlight border border-gray-300 rounded-lg px-4 py-3"
+            >
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Nachname</label
+              >
+              <input
+                type="text"
+                id="billing-lastname"
+                required
+                class="w-full focus:outline-none"
+              />
+            </div>
+          </div>
+
+          <div
+            class="input-highlight border border-gray-300 rounded-lg px-4 py-3"
+          >
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >E-Mail</label
+            >
+            <input
+              type="email"
+              id="billing-email"
+              required
+              class="w-full focus:outline-none"
+              readonly
+            />
+          </div>
+
+          <div
+            class="input-highlight border border-gray-300 rounded-lg px-4 py-3"
+          >
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Adresse</label
+            >
+            <input
+              type="text"
+              name="address"
+              required
+              class="w-full focus:outline-none"
+              placeholder="Straße und Hausnummer"
+            />
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-6">
+            <div
+              class="input-highlight border border-gray-300 rounded-lg px-4 py-3"
+            >
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Stadt</label
+              >
+              <input
+                type="text"
+                name="city"
+                required
+                class="w-full focus:outline-none"
+              />
+            </div>
+            <div
+              class="input-highlight border border-gray-300 rounded-lg px-4 py-3"
+            >
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Postleitzahl</label
+              >
+              <input
+                type="text"
+                name="postcode"
+                required
+                class="w-full focus:outline-none"
+              />
+            </div>
+            <div
+              class="input-highlight border border-gray-300 rounded-lg px-4 py-3"
+            >
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Land</label
+              >
+              <select
+                name="country"
+                required
+                class="w-full focus:outline-none bg-transparent"
+              >
+                <option value="">Auswählen</option>
+                <option value="DE">Deutschland</option>
+                <option value="AT">Österreich</option>
+                <option value="CH">Schweiz</option>
+              </select>
+            </div>
+          </div>
+
+          <div
+            class="input-highlight border border-gray-300 rounded-lg px-4 py-3"
+          >
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >IBAN</label
+            >
+            <input
+              type="text"
+              name="iban"
+              required
+              class="w-full focus:outline-none"
+              placeholder="DE00 1234 5678 9012 3456 78"
+            />
+            <p class="text-xs text-gray-500 mt-1">
+              Zahlung erfolgt per SEPA Lastschrift
+            </p>
+          </div>
+
+          <div class="flex items-start">
+            <div class="flex items-center h-5">
+              <input
+                id="terms"
+                name="terms"
+                type="checkbox"
+                required
+                class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              />
+            </div>
+            <div class="ml-3 text-sm">
+              <label for="terms" class="font-medium text-gray-700"
+                >Ich akzeptiere die
+                <a href="#" class="text-indigo-600 hover:underline">AGB</a> und
+                die
+                <a href="#" class="text-indigo-600 hover:underline"
+                  >Zahlungsbedingungen</a
+                ></label
+              >
+              <p class="text-gray-500 mt-1">
+                Nach 3 Tagen kostenlosem Test beginnt die jährliche Zahlung von
+                99€
+              </p>
+            </div>
+          </div>
+
+          <div class="pt-4 flex justify-between">
+            <button
+              type="button"
+              onclick="prevForm()"
+              class="bg-gray-200 text-gray-700 py-3 px-6 rounded-lg font-medium hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+            >
+              <i class="fas fa-arrow-left mr-2"></i> Zurück
+            </button>
+            <button
+              type="button"
+              onclick="nextForm()"
+              class="bg-indigo-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Bestellung abschließen <i class="fas fa-check ml-2"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Form 3: Confirmation -->
+      <div
+        id="form3"
+        class="form-step bg-white rounded-xl shadow-lg p-8 text-center"
+      >
+        <div
+          class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6"
+        >
+          <i class="fas fa-check text-green-600 text-3xl"></i>
+        </div>
+
+        <h2 class="text-2xl font-bold mb-4">
+          Vielen Dank für Ihre Bestellung!
+        </h2>
+        <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+          Sie haben erfolgreich die EbookPremium-Mitgliedschaft mit 3 Tagen
+          kostenlosem Test gebucht.
+        </p>
+
+        <div class="bg-gray-50 rounded-lg p-6 mb-8 max-w-md mx-auto text-left">
+          <h3 class="font-medium text-lg mb-4">Ihre Bestellübersicht:</h3>
+          <div class="space-y-3">
+            <div class="flex justify-between">
+              <span>Testphase:</span>
+              <span class="font-medium">3 Tage (0€)</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Jährliche Gebühr:</span>
+              <span class="font-medium">99€</span>
+            </div>
+            <div
+              class="flex justify-between border-t border-gray-200 pt-3 mt-3"
+            >
+              <span>Zahlungsmethode:</span>
+              <span class="font-medium">SEPA Lastschrift</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+          Sie erhalten eine Bestätigungs-E-Mail mit allen Details. Bei Fragen
+          oder für Rückerstattungen kontaktieren Sie uns bitte unter
+          <a
+            href="mailto:support@ebookpremium.de"
+            class="text-indigo-600 hover:underline"
+            >support@ebookpremium.de</a
+          >.
+        </p>
+
+        <a
+          href="lib.html"
+          class="inline-block bg-indigo-600 text-white py-3 px-8 rounded-lg font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        >
+          Zu Ihrer Bibliothek <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+      <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-lg font-semibold mb-4">EbookPremium</h3>
+            <p class="text-gray-400">
+              Unbegrenzter Zugang zu über 100.000 Ebooks in allen Genres.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Rechtliches</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white">AGB</a>
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white"
+                  >Datenschutz</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white">Impressum</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Kontakt</h3>
+            <ul class="space-y-2">
+              <li class="text-gray-400">support@ebookpremium.de</li>
+              <li class="text-gray-400">+49 123 456 789</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold mb-4">Folgen Sie uns</h3>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><i class="fab fa-instagram"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+        <div
+          class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400"
+        >
+          <p>&copy; 2023 EbookPremium. Alle Rechte vorbehalten.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      let currentStep = 1;
+      const totalSteps = 3;
+
+      // Check authentication when page loads
+      document.addEventListener("DOMContentLoaded", function () {
+        fetch("/api/check-auth")
+          .then((response) => {
+            console.log("Auth check response status:", response.status);
+            if (!response.ok) {
+              console.log("Auth check failed, redirecting to login");
+              window.location.href = "/login";
+              return;
+            }
+            return response.json();
+          })
+          .then((data) => {
+            if (data && data.authenticated) {
+              console.log("Auth check passed, user ID:", data.userId);
+              // Initialize the page
+              updateProgress();
+            } else {
+              window.location.href = "/login";
+            }
+          })
+          .catch((error) => {
+            console.error("Auth check error:", error);
+            window.location.href = "/login";
+          });
+      });
+
+      function updateProgress() {
+        const progressPercentage = ((currentStep - 1) / (totalSteps - 1)) * 100;
+        document.getElementById(
+          "progress-bar"
+        ).style.width = `${progressPercentage}%`;
+
+        document.querySelectorAll(".step").forEach((step) => {
+          const stepNumber = parseInt(step.dataset.step);
+          const circle = step.querySelector("div");
+
+          if (stepNumber <= currentStep) {
+            circle.classList.remove("bg-gray-200", "text-gray-600");
+            circle.classList.add("bg-indigo-600", "text-white");
+            step.querySelector("span").classList.remove("text-gray-600");
+            step.querySelector("span").classList.add("text-indigo-600");
+          } else {
+            circle.classList.remove("bg-indigo-600", "text-white");
+            circle.classList.add("bg-gray-200", "text-gray-600");
+            step.querySelector("span").classList.remove("text-indigo-600");
+            step.querySelector("span").classList.add("text-gray-600");
+          }
+        });
+      }
+
+      async function nextForm() {
+        if (currentStep === 1) {
+          const form = document.getElementById("contact-form");
+          const firstname = form.elements["firstname"].value;
+          const lastname = form.elements["lastname"].value;
+          const email = form.elements["email"].value;
+
+          if (!firstname || !lastname || !email) {
+            alert("Bitte füllen Sie alle erforderlichen Felder aus.");
+            return;
+          }
+
+          document.getElementById("billing-firstname").value = firstname;
+          document.getElementById("billing-lastname").value = lastname;
+          document.getElementById("billing-email").value = email;
+        } else if (currentStep === 2) {
+          // SAVE TO DATABASE
+          const form = document.getElementById("billing-form");
+          const formData = new FormData(form);
+          const data = Object.fromEntries(formData);
+
+          // Add data from step 1
+          data.firstname = document.getElementById("billing-firstname").value;
+          data.lastname = document.getElementById("billing-lastname").value;
+          data.email = document.getElementById("billing-email").value;
+
+          try {
+            const response = await fetch("/api/lp-register", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+
+            if (!result.success) {
+              alert("Fehler beim Speichern: " + result.error);
+              return;
+            }
+          } catch (error) {
+            alert("Ein Fehler ist aufgetreten.");
+            return;
+          }
+        }
+
+        if (currentStep < totalSteps) {
+          document
+            .getElementById(`form${currentStep}`)
+            .classList.remove("active");
+          currentStep++;
+          document.getElementById(`form${currentStep}`).classList.add("active");
+          updateProgress();
+
+          window.scrollTo({
+            top: document.querySelector("main").offsetTop,
+            behavior: "smooth",
+          });
+        }
+      }
+
+      function prevForm() {
+        if (currentStep > 1) {
+          document
+            .getElementById(`form${currentStep}`)
+            .classList.remove("active");
+          currentStep--;
+          document.getElementById(`form${currentStep}`).classList.add("active");
+          updateProgress();
+
+          window.scrollTo({
+            top: document.querySelector("main").offsetTop,
+            behavior: "smooth",
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

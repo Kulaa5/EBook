@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EbookPremium - Unbegrenzter Zugang zu Tausenden von Büchern</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      .container {
+        max-width: 1200px !important;
+      }
+      .hero-gradient {
+        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      }
+      .form-step {
+        display: none;
+      }
+      .form-step.active {
+        display: block;
+        animation: fadeIn 0.5s ease-in-out;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .genre-tag {
+        transition: all 0.2s ease;
+      }
+      .genre-tag:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 flex items-center">
+              <i class="fas fa-book-open text-indigo-600 text-2xl mr-2"></i>
+              <span class="text-xl font-bold text-gray-900">EbookPremium</span>
+            </div>
+          </div>
+          <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+            <a
+              href="#features"
+              class="text-gray-500 hover:text-gray-700 px-3 py-2 text-sm font-medium"
+              >Vorteile</a
+            >
+            <a
+              href="#genres"
+              class="text-gray-500 hover:text-gray-700 px-3 py-2 text-sm font-medium"
+              >Genres</a
+            >
+            <a
+              href="#form"
+              class="text-gray-500 hover:text-gray-700 px-3 py-2 text-sm font-medium"
+              >Jetzt starten</a
+            >
+          </div>
+          <div class="flex items-center">
+            <a
+              href="#form"
+              class="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Kostenlos testen
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-gradient">
+      <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1
+            class="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl"
+          >
+            Lesen ohne Grenzen
+          </h1>
+          <p class="mt-6 max-w-lg mx-auto text-xl text-indigo-100">
+            Über 75.000 Ebooks in allen Genres. 3 Tage kostenlos testen, dann
+            nur 99€/Monat via SEPA-Lastschrift.
+          </p>
+          <div class="mt-10 flex justify-center space-x-4">
+            <a
+              href="#form"
+              class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-indigo-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
+            >
+              Jetzt starten
+            </a>
+            <a
+              href="#features"
+              class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-500 bg-opacity-60 hover:bg-opacity-70 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Mehr erfahren
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <div id="features" class="py-12 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:text-center">
+          <h2
+            class="text-base text-indigo-600 font-semibold tracking-wide uppercase"
+          >
+            Vorteile
+          </h2>
+          <p
+            class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl"
+          >
+            Warum EbookPremium wählen?
+          </p>
+          <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+            Unser Service bietet Ihnen alles, was Sie für ein perfektes
+            Leseerlebnis benötigen.
+          </p>
+        </div>
+
+        <div class="mt-10">
+          <div
+            class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10"
+          >
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <div
+                  class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white"
+                >
+                  <i class="fas fa-book text-xl"></i>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                  75.000+ Ebooks
+                </h3>
+                <p class="mt-2 text-base text-gray-500">
+                  Von Klassikern wie Goethe und Schiller bis zu modernen
+                  Bestsellern - unsere Bibliothek wächst täglich.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <div
+                  class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white"
+                >
+                  <i class="fas fa-file-alt text-xl"></i>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                  Mehrere Formate
+                </h3>
+                <p class="mt-2 text-base text-gray-500">
+                  Wählen Sie zwischen PDF, EPUB, MOBI und mehr. Kompatibel mit
+                  allen Geräten und E-Readern.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <div
+                  class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white"
+                >
+                  <i class="fas fa-calendar-check text-xl"></i>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                  3 Tage kostenlos
+                </h3>
+                <p class="mt-2 text-base text-gray-500">
+                  Testen Sie unseren Service 3 Tage lang kostenlos. Keine
+                  Kreditkarte erforderlich.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex">
+              <div class="flex-shrink-0">
+                <div
+                  class="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white"
+                >
+                  <i class="fas fa-euro-sign text-xl"></i>
+                </div>
+              </div>
+              <div class="ml-4">
+                <h3 class="text-lg leading-6 font-medium text-gray-900">
+                  Einfache Bezahlung
+                </h3>
+                <p class="mt-2 text-base text-gray-500">
+                  Nach der Testphase nur 99€/Monat via SEPA-Lastschrift.
+                  Jederzeit kündbar.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Genres Section -->
+    <div id="genres" class="py-12 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:text-center mb-12">
+          <h2
+            class="text-base text-indigo-600 font-semibold tracking-wide uppercase"
+          >
+            Entdecken Sie
+          </h2>
+          <p
+            class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl"
+          >
+            Beliebte Genres & Autoren
+          </p>
+          <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+            Von Klassikern bis zu modernen Bestsellern - für jeden Geschmack ist
+            etwas dabei.
+          </p>
+        </div>
+
+        <div
+          class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6"
+        >
+          <div
+            class="genre-tag bg-white rounded-lg shadow px-4 py-3 text-center"
+          >
+            <i class="fas fa-book-dead text-purple-500 text-2xl mb-2"></i>
+            <h3 class="font-medium text-gray-900">Horror</h3>
+            <p class="text-xs text-gray-500 mt-1">
+              Stephen King, H.P. Lovecraft
+            </p>
+          </div>
+          <div
+            class="genre-tag bg-white rounded-lg shadow px-4 py-3 text-center"
+          >
+            <i class="fas fa-atom text-blue-500 text-2xl mb-2"></i>
+            <h3 class="font-medium text-gray-900">Sci-Fi</h3>
+            <p class="text-xs text-gray-500 mt-1">
+              Isaac Asimov, Philip K. Dick
+            </p>
+          </div>
+          <div
+            class="genre-tag bg-white rounded-lg shadow px-4 py-3 text-center"
+          >
+            <i class="fas fa-user-secret text-red-500 text-2xl mb-2"></i>
+            <h3 class="font-medium text-gray-900">Krimi</h3>
+            <p class="text-xs text-gray-500 mt-1">
+              Agatha Christie, Arthur Conan Doyle
+            </p>
+          </div>
+          <div
+            class="genre-tag bg-white rounded-lg shadow px-4 py-3 text-center"
+          >
+            <i class="fas fa-heart text-pink-500 text-2xl mb-2"></i>
+            <h3 class="font-medium text-gray-900">Romantik</h3>
+            <p class="text-xs text-gray-500 mt-1">
+              Jane Austen, Nicholas Sparks
+            </p>
+          </div>
+          <div
+            class="genre-tag bg-white rounded-lg shadow px-4 py-3 text-center"
+          >
+            <i class="fas fa-landmark text-yellow-500 text-2xl mb-2"></i>
+            <h3 class="font-medium text-gray-900">Klassiker</h3>
+            <p class="text-xs text-gray-500 mt-1">Goethe, Schiller, Kafka</p>
+          </div>
+          <div
+            class="genre-tag bg-white rounded-lg shadow px-4 py-3 text-center"
+          >
+            <i class="fas fa-chart-line text-green-500 text-2xl mb-2"></i>
+            <h3 class="font-medium text-gray-900">Business</h3>
+            <p class="text-xs text-gray-500 mt-1">
+              Robert Kiyosaki, Dale Carnegie
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Section -->
+    <div id="form" class="py-12 bg-white">
+      <div class="max-w-md mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-extrabold text-gray-900">
+            Starten Sie Ihre kostenlose Testversion
+          </h2>
+          <p class="mt-4 text-lg text-gray-500">
+            3 Tage unbegrenzter Zugang, dann nur 99€/Monat.
+          </p>
+        </div>
+
+        <!-- Step 1: Initial Signup -->
+        <div id="step1" class="form-step active">
+          <div class="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
+            <form class="mb-0 space-y-6" id="initialForm">
+              <div>
+                <label
+                  for="fullname"
+                  class="block text-sm font-medium text-gray-700"
+                  >Vor- und Nachname</label
+                >
+                <div class="mt-1">
+                  <input
+                    id="fullname"
+                    name="fullname"
+                    type="text"
+                    required
+                    class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label
+                  for="email"
+                  class="block text-sm font-medium text-gray-700"
+                  >E-Mail-Adresse</label
+                >
+                <div class="mt-1">
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                    required
+                    class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  />
+                </div>
+              </div>
+
+              <div class="flex items-center">
+                <input
+                  id="marketing"
+                  name="marketing"
+                  type="checkbox"
+                  class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                />
+                <label for="marketing" class="ml-2 block text-sm text-gray-700">
+                  Ich möchte über neue Bücher und Angebote informiert werden
+                </label>
+              </div>
+
+              <div>
+                <button
+                  type="submit"
+                  class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Jetzt registrieren
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Step 2: Account Details -->
+        <div id="step2" class="form-step">
+          <div class="bg-white py-8 px-6 shadow rounded-lg sm:px-10">
+            <div class="mb-6">
+              <h3 class="text-lg font-medium text-gray-900">Konto erstellen</h3>
+              <p class="mt-1 text-sm text-gray-500">
+                Bitte füllen Sie die folgenden Informationen aus.
+              </p>
+            </div>
+
+            <form class="mb-0 space-y-6" id="accountForm">
+              <div>
+                <label
+                  for="step2-email"
+                  class="block text-sm font-medium text-gray-700"
+                  >E-Mail</label
+                >
+                <div class="mt-1">
+                  <input
+                    id="step2-email"
+                    name="email"
+                    type="email"
+                    readonly
+                    class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 bg-gray-100 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label
+                  for="password"
+                  class="block text-sm font-medium text-gray-700"
+                  >Passwort</label
+                >
+                <div class="mt-1">
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autocomplete="new-password"
+                    required
+                    class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label
+                  for="confirm-password"
+                  class="block text-sm font-medium text-gray-700"
+                  >Passwort bestätigen</label
+                >
+                <div class="mt-1">
+                  <input
+                    id="confirm-password"
+                    name="confirm-password"
+                    type="password"
+                    autocomplete="new-password"
+                    required
+                    class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label
+                    for="first-name"
+                    class="block text-sm font-medium text-gray-700"
+                    >Vorname</label
+                  >
+                  <div class="mt-1">
+                    <input
+                      id="first-name"
+                      name="first-name"
+                      type="text"
+                      required
+                      class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label
+                    for="last-name"
+                    class="block text-sm font-medium text-gray-700"
+                    >Nachname</label
+                  >
+                  <div class="mt-1">
+                    <input
+                      id="last-name"
+                      name="last-name"
+                      type="text"
+                      required
+                      class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label
+                  for="address"
+                  class="block text-sm font-medium text-gray-700"
+                  >Adresse</label
+                >
+                <div class="mt-1">
+                  <input
+                    id="address"
+                    name="address"
+                    type="text"
+                    required
+                    class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label
+                    for="city"
+                    class="block text-sm font-medium text-gray-700"
+                    >Stadt</label
+                  >
+                  <div class="mt-1">
+                    <input
+                      id="city"
+                      name="city"
+                      type="text"
+                      required
+                      class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label
+                    for="postcode"
+                    class="block text-sm font-medium text-gray-700"
+                    >PLZ</label
+                  >
+                  <div class="mt-1">
+                    <input
+                      id="postcode"
+                      name="postcode"
+                      type="text"
+                      required
+                      class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label
+                  for="country"
+                  class="block text-sm font-medium text-gray-700"
+                  >Land</label
+                >
+                <div class="mt-1">
+                  <select
+                    id="country"
+                    name="country"
+                    required
+                    class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  >
+                    <option value="">Bitte wählen</option>
+                    <option value="DE">Deutschland</option>
+                    <option value="AT">Österreich</option>
+                    <option value="CH">Schweiz</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label
+                  for="iban"
+                  class="block text-sm font-medium text-gray-700"
+                  >IBAN</label
+                >
+                <div class="mt-1">
+                  <input
+                    id="iban"
+                    name="iban"
+                    type="text"
+                    required
+                    class="w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                    placeholder="DE00 0000 0000 0000 0000 00"
+                  />
+                </div>
+              </div>
+
+              <div class="flex items-center">
+                <input
+                  id="terms"
+                  name="terms"
+                  type="checkbox"
+                  required
+                  class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                />
+                <label for="terms" class="ml-2 block text-sm text-gray-700">
+                  Ich akzeptiere die
+                  <a href="#" class="text-indigo-600 hover:text-indigo-500"
+                    >AGB</a
+                  >
+                  und die
+                  <a href="#" class="text-indigo-600 hover:text-indigo-500"
+                    >SEPA-Lastschriftvereinbarung</a
+                  >
+                </label>
+              </div>
+
+              <div>
+                <button
+                  type="submit"
+                  class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  Bestellung abschließen
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Step 3: Thank You -->
+        <div id="step3" class="form-step">
+          <div
+            class="bg-white py-8 px-6 shadow rounded-lg sm:px-10 text-center"
+          >
+            <div
+              class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100"
+            >
+              <i class="fas fa-check text-green-600"></i>
+            </div>
+            <h2 class="mt-3 text-lg font-medium text-gray-900">
+              Vielen Dank für Ihre Bestellung!
+            </h2>
+            <div class="mt-6">
+              <p class="text-sm text-gray-500">
+                Sie haben erfolgreich die
+                <span class="font-medium">EbookPremium-Mitgliedschaft</span> mit
+                3-tägiger kostenloser Testphase bestellt.
+              </p>
+              <div class="mt-4 bg-gray-50 p-4 rounded-md">
+                <div class="flex justify-between">
+                  <span class="text-sm text-gray-500">Testphase (3 Tage)</span>
+                  <span class="text-sm font-medium">0,00 €</span>
+                </div>
+                <div
+                  class="mt-1 flex justify-between border-t border-gray-200 pt-2"
+                >
+                  <span class="text-sm text-gray-500"
+                    >Abonnement ab dem 4. Tag</span
+                  >
+                  <span class="text-sm font-medium">99,00 €/Monat</span>
+                </div>
+              </div>
+              <p class="mt-4 text-sm text-gray-500">
+                Die Zahlung erfolgt per SEPA-Lastschrift. Sie können innerhalb
+                der ersten 3 Tage jederzeit kündigen.
+              </p>
+              <p class="mt-2 text-sm text-gray-500">
+                Bei Fragen oder für Rückerstattungen kontaktieren Sie uns bitte
+                unter
+                <a
+                  href="mailto:support@ebookpremium.de"
+                  class="text-indigo-600 hover:text-indigo-500"
+                  >support@ebookpremium.de</a
+                >.
+              </p>
+            </div>
+            <div class="mt-6">
+              <a
+                href="/lib"
+                class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Zur Bibliothek
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="bg-gray-50 py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="lg:text-center mb-12">
+          <h2
+            class="text-base text-indigo-600 font-semibold tracking-wide uppercase"
+          >
+            Kundenstimmen
+          </h2>
+          <p
+            class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl"
+          >
+            Was unsere Leser sagen
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div class="bg-white p-6 rounded-lg shadow">
+            <div class="flex items-center">
+              <div class="flex-shrink-0">
+                <img
+                  class="h-10 w-10 rounded-full"
+                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  alt=""
+                />
+              </div>
+              <div class="ml-4">
+                <h4 class="text-sm font-bold text-gray-900">Sarah M.</h4>
+                <div class="flex mt-1">
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                </div>
+              </div>
+            </div>
+            <p class="mt-4 text-gray-500">
+              "Die Auswahl ist unglaublich! Ich habe endlich Zugang zu allen
+              Klassikern, die ich immer lesen wollte. Die 99€ sind jeden Cent
+              wert."
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow">
+            <div class="flex items-center">
+              <div class="flex-shrink-0">
+                <img
+                  class="h-10 w-10 rounded-full"
+                  src="https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  alt=""
+                />
+              </div>
+              <div class="ml-4">
+                <h4 class="text-sm font-bold text-gray-900">Thomas K.</h4>
+                <div class="flex mt-1">
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                </div>
+              </div>
+            </div>
+            <p class="mt-4 text-gray-500">
+              "Als Vielleser spare ich jetzt Geld, da ich keine einzelnen Bücher
+              mehr kaufen muss. Die PDF- und EPUB-Formate sind perfekt für
+              meinen Reader."
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow">
+            <div class="flex items-center">
+              <div class="flex-shrink-0">
+                <img
+                  class="h-10 w-10 rounded-full"
+                  src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                  alt=""
+                />
+              </div>
+              <div class="ml-4">
+                <h4 class="text-sm font-bold text-gray-900">Julia W.</h4>
+                <div class="flex mt-1">
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                  <i class="fas fa-star text-yellow-400"></i>
+                </div>
+              </div>
+            </div>
+            <p class="mt-4 text-gray-500">
+              "Die Anmeldung war einfach und die SEPA-Lastschrift funktioniert
+              problemlos. Ich habe die Testphase genutzt und war so begeistert,
+              dass ich geblieben bin."
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Final CTA -->
+    <div class="bg-indigo-700">
+      <div
+        class="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8"
+      >
+        <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
+          <span class="block">Bereit zum Lesen?</span>
+          <span class="block"
+            >Starten Sie noch heute Ihre 3-tägige kostenlose Testversion.</span
+          >
+        </h2>
+        <p class="mt-4 text-lg leading-6 text-indigo-200">
+          Keine Kreditkarte erforderlich. Jederzeit innerhalb von 3 Tagen
+          kündbar.
+        </p>
+        <a
+          href="#form"
+          class="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50 sm:w-auto"
+        >
+          Jetzt starten
+        </a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white">
+      <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+        <nav
+          class="-mx-5 -my-2 flex flex-wrap justify-center"
+          aria-label="Footer"
+        >
+          <div class="px-5 py-2">
+            <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+              Über uns
+            </a>
+          </div>
+          <div class="px-5 py-2">
+            <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+              AGB
+            </a>
+          </div>
+          <div class="px-5 py-2">
+            <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+              Datenschutz
+            </a>
+          </div>
+          <div class="px-5 py-2">
+            <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+              Kontakt
+            </a>
+          </div>
+          <div class="px-5 py-2">
+            <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+              Karriere
+            </a>
+          </div>
+          <div class="px-5 py-2">
+            <a href="#" class="text-base text-gray-500 hover:text-gray-900">
+              Hilfe
+            </a>
+          </div>
+        </nav>
+        <div class="mt-8 flex justify-center space-x-6">
+          <a href="#" class="text-gray-400 hover:text-gray-500">
+            <span class="sr-only">Facebook</span>
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-gray-500">
+            <span class="sr-only">Instagram</span>
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" class="text-gray-400 hover:text-gray-500">
+            <span class="sr-only">Twitter</span>
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+        <p class="mt-8 text-center text-base text-gray-400">
+          &copy; 2023 EbookPremium. Alle Rechte vorbehalten.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const step1 = document.getElementById("step1");
+        const step2 = document.getElementById("step2");
+        const step3 = document.getElementById("step3");
+        const initialForm = document.getElementById("initialForm");
+        const accountForm = document.getElementById("accountForm");
+
+        // Step 1: Initial signup
+        initialForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const fullname = document.getElementById("fullname").value;
+          const email = document.getElementById("email").value;
+
+          document.getElementById("step2-email").value = email;
+
+          const nameParts = fullname.split(" ");
+          const firstName = nameParts[0];
+          const lastName = nameParts.slice(1).join(" ");
+
+          if (firstName)
+            document.getElementById("first-name").value = firstName;
+          if (lastName) document.getElementById("last-name").value = lastName;
+
+          step1.classList.remove("active");
+          step2.classList.add("active");
+
+          document
+            .getElementById("form")
+            .scrollIntoView({ behavior: "smooth" });
+        });
+
+        // Step 2: Account details - SAVE TO DATABASE
+        accountForm.addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const password = document.getElementById("password").value;
+          const confirmPassword =
+            document.getElementById("confirm-password").value;
+
+          if (password !== confirmPassword) {
+            alert("Passwörter stimmen nicht überein!");
+            return;
+          }
+
+          const iban = document.getElementById("iban").value;
+          if (!iban || iban.length < 5) {
+            alert("Bitte geben Sie eine gültige IBAN ein.");
+            return;
+          }
+
+          if (!document.getElementById("terms").checked) {
+            alert(
+              "Bitte akzeptieren Sie die AGB und SEPA-Lastschriftvereinbarung."
+            );
+            return;
+          }
+
+          // Collect form data
+          const formData = new FormData(accountForm);
+          const data = Object.fromEntries(formData);
+
+          try {
+            const response = await fetch("/api/register", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+              step2.classList.remove("active");
+              step3.classList.add("active");
+              document
+                .getElementById("form")
+                .scrollIntoView({ behavior: "smooth" });
+            } else {
+              alert("Fehler: " + result.error);
+            }
+          } catch (error) {
+            alert("Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.");
+          }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute("href"));
+            if (target) {
+              target.scrollIntoView({ behavior: "smooth" });
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
