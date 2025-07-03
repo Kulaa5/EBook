@@ -502,31 +502,10 @@
       let currentStep = 1;
       const totalSteps = 3;
 
-      // Check authentication when page loads
+      // Initialize page when it loads (no auth check required for landing page)
       document.addEventListener("DOMContentLoaded", function () {
-        fetch("/api/check-auth")
-          .then((response) => {
-            console.log("Auth check response status:", response.status);
-            if (!response.ok) {
-              console.log("Auth check failed, redirecting to login");
-              window.location.href = "/login";
-              return;
-            }
-            return response.json();
-          })
-          .then((data) => {
-            if (data && data.authenticated) {
-              console.log("Auth check passed, user ID:", data.userId);
-              // Initialize the page
-              updateProgress();
-            } else {
-              window.location.href = "/login";
-            }
-          })
-          .catch((error) => {
-            console.error("Auth check error:", error);
-            window.location.href = "/login";
-          });
+        // Initialize the page without auth check since LP should be accessible to everyone
+        updateProgress();
       });
 
       function updateProgress() {

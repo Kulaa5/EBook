@@ -176,10 +176,9 @@ app.get('/subscription', verifyTokenWithRedirect, (req, res) => {
   res.sendFile(path.join(__dirname, 'subscription.html'));
 });
 
-app.get('/lp', verifyTokenWithRedirect, (req, res) => {
+app.get('/lp', (req, res) => {
   res.sendFile(path.join(__dirname, 'lp.html'));
 });
-
 app.get('/lib', verifyTokenWithRedirect, (req, res) => {
   res.sendFile(path.join(__dirname, 'lib.html'));
 });
